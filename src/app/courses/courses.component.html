@@ -1,1 +1,26 @@
 <p>courses works!</p>
+
+<body>
+    <h1>Webbutvecklingsprogrammet Miun: Kurser</h1>
+    <label for="search">Sök:</label>
+    <input type="text" name="search" id="search" [(ngModel)]="searchTerm" (keyup)="searchTable()">
+    <table>
+        <caption>Klicka på rad för att se studieplan</caption>
+        <thead>
+            <tr>
+                <th (click)="sortByCode()">Kurskod</th>
+                <th (click)="sortByName()">Namn</th>
+                <th (click)="sortByProg()">Progression</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let course of coursesArr">
+                <a href="{{course.syllabus}}">
+                    <td>{{course.code}}</td>
+                    <td>{{course.coursename}}</td>
+                    <td>{{course.progression}}</td>
+                </a>
+            </tr>
+        </tbody>
+    </table>
+</body>
