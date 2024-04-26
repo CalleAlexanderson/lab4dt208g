@@ -12,22 +12,34 @@ import { FormsModule } from '@angular/forms';
 })
 export class CoursesComponent {
   coursesArr: any[] = [];
+  coursesArrCopy: any[] = [];
   codeSorted: boolean = false;
   nameSorted: boolean = false;
   progSorted: boolean = false;
   searchTerm: string = "";
+  coursesArrCopySorted: any[] = [];
 
   constructor(private coursesService: GetCoursesService) {}
 
   ngOnInit(): void {
     this.coursesService.getCourses().subscribe((data) => {
       this.coursesArr = data;
-      console.log(data);
+      //använder inte slice för då blir det konstigt när jag sorterar med prog, array byter håll varje sortering
+      for (let index = 0; index < this.coursesArr.length; index++) {
+        this.coursesArrCopy.push(this.coursesArr[index])
+      }
+      console.log(this.coursesArr);
     });
   }
 
   searchTable(): void {
     console.log("söker: " + this.searchTerm);
+    for (let index = 0; index < this.coursesArr.length; index++) {
+      console.log(this.coursesArrCopy[index]);
+      if (this.searchTerm) {
+        
+      }
+    }
   }
 
   sortByCode(): void {
@@ -36,10 +48,14 @@ export class CoursesComponent {
     this.nameSorted = false;
     this.progSorted = false;
     if (this.codeSorted == false) {
-      console.log('sorterat efter kod uppifrån ner');
+      // sorterar array efter code
+      this.coursesArrCopySorted = this.coursesArrCopy.sort((a, b) => (a.code > b.code) ? 1 : -1)
+      this.coursesArrCopy = this.coursesArrCopySorted;
+
       this.codeSorted = true;
     } else {
-      console.log('sorterat efter kod nerifrån upp');
+      this.coursesArrCopySorted = this.coursesArrCopy.sort((a, b) => (a.code > b.code) ? -1 : 1)
+      this.coursesArrCopy = this.coursesArrCopySorted;
       this.codeSorted = false;
     }
   }
@@ -50,10 +66,13 @@ export class CoursesComponent {
     this.codeSorted = false;
     this.progSorted = false;
     if (this.nameSorted == false) {
-      console.log('sorterat efter namn uppifrån ner');
+      // sorterar array efter namn
+      this.coursesArrCopySorted = this.coursesArrCopy.sort((a, b) => (a.coursename > b.coursename) ? 1 : -1)
+      this.coursesArrCopy = this.coursesArrCopySorted;
       this.nameSorted = true;
     } else {
-      console.log('sorterat efter namn nerifrån upp');
+      this.coursesArrCopySorted = this.coursesArrCopy.sort((a, b) => (a.coursename > b.coursename) ? -1 : 1)
+      this.coursesArrCopy = this.coursesArrCopySorted;
       this.nameSorted = false;
     }
   }
@@ -64,10 +83,13 @@ export class CoursesComponent {
     this.codeSorted = false;
     this.nameSorted = false;
     if (this.progSorted == false) {
-      console.log('sorterat efter prog uppifrån ner');
+      // sorterar array efter progression
+      this.coursesArrCopySorted = this.coursesArrCopy.sort((a, b) => (a.progression > b.progression) ? 1 : -1)
+      this.coursesArrCopy = this.coursesArrCopySorted;
       this.progSorted = true;
     } else {
-      console.log('sorterat efter prog nerifrån upp');
+      this.coursesArrCopySorted = this.coursesArrCopy.sort((a, b) => (a.progression > b.progression) ? -1 : 1)
+      this.coursesArrCopy = this.coursesArrCopySorted;
       this.progSorted = false;
     }
   }
@@ -75,5 +97,11 @@ export class CoursesComponent {
   //återställer tabell för ny sortering
   resetTable(): void {
     console.log('tabell återställd');
+    
+    this.coursesArrCopy = [];
+    for (let index = 0; index < this.coursesArr.length; index++) {
+      this.coursesArrCopy.push(this.coursesArr[index])
+    }
+    console.log(this.coursesArr);
   }
 }

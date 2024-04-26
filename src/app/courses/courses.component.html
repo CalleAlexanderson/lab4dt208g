@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let course of coursesArr">
+            <tr *ngFor="let course of coursesArrCopy">
                 <a href="{{course.syllabus}}">
                     <td>{{course.code}}</td>
                     <td>{{course.coursename}}</td>
