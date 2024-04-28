@@ -1,9 +1,11 @@
 <main>
-    <h1>Webbutvecklingsprogrammet Miun: Kurser</h1>
-    <label for="search">Sök:</label>
-    <input type="text" name="search" id="search" [(ngModel)]="searchTerm" (keyup)="searchTable()">
+    <h1>Webbutveckling - Kurser</h1>
+    <div>
+        <label for="search">Sök:</label>
+        <input type="text" name="search" id="search" [(ngModel)]="searchTerm" (keyup)="searchTable()">
+    </div>
     <table>
-        <caption>Klicka på rad för att se studieplan</caption>
+        <caption>Klicka på kurskod för att se studieplan</caption>
         <thead>
             <tr>
                 <th (click)="sortByCode()">Kurskod</th>
@@ -13,11 +15,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let course of coursesArrCopy">
-                <a href="{{course.syllabus}}">
-                    <td>{{course.code}}</td>
-                    <td>{{course.coursename}}</td>
-                    <td>{{course.progression}}</td>
-                </a>
+
+                <td><a href="{{course.syllabus}}">{{course.code}}</a></td>
+                <td>{{course.coursename}}</td>
+                <td>{{course.progression}}</td>
+
             </tr>
         </tbody>
     </table>
