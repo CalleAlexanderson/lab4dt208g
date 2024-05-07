@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Mitt arbete
+
+Jag har skapat en webbsida med hjälp av Angular 17, webbsidan består av en undersida och en service. Webbsidan visar upp de olika kurser jag har/kommer läsa på webbutvecklingsprogrammet, servicen hämtar dessa kurser genom observeable, kurserna ligger i en json fil. 
+
+På webbsidan kan du filtrera kurserna genom en sökfunktion samt sortera kurserna efter bokstavsordning (från a till ö eller ö till a) genom att trycka på en av raderna i tabellhuvudet. 
